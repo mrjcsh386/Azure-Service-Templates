@@ -1,0 +1,18 @@
+#! /bin/bash --
+
+
+# Tertiary check of binaries
+apt update && apt -y upgrade
+
+# Check for the presence of openssh-server. If not present already, install.
+if ! dpkg -l openssh-server &>/dev/null; then
+  apt -y install openssh-server
+fi
+
+# Check for the presence of iptables & ipset. If not present already, install.
+if ! command -v iptables; then
+  apt -y install iptables ipset
+fi
+
+# Just installing some tools I am comfortable with
+apt -y install tree htop iftop iotop git
